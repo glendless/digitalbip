@@ -48,4 +48,20 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+        public function headOfFamily()
+    {
+        return $this->hasOne(HeadOfFamily::class);
+    }
+
+            public function familyMember()
+    {
+        return $this->hasOne(familyMember::class);
+    }
+
+      public function developmentApplicants()
+    {
+        return $this->hasMany(DevelopmentApplicant::class);
+    }
+
 }
