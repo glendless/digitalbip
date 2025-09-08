@@ -12,7 +12,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('family_members', function (Blueprint $table) {
-            $table->id();
             $table->uuid('id')->primary();
 
             $table->uuid('head_of_family_id');
