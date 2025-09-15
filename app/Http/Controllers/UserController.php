@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\ResponseHelper;
+use App\Http\Requests\UserStoreRequest;
+use App\Http\Requests\UserUpdateRequest;
 use App\Http\Resources\PaginatedResource;
 use App\Http\Resources\UserResource;
 use App\Interfaces\UserRepositoryInterface;
@@ -12,7 +14,6 @@ class UserController extends Controller
 {
 
     private UserRepositoryInterface $userRepository;
-
 
     public function __construct(UserRepositoryInterface $userRepository)
     {
@@ -30,8 +31,7 @@ class UserController extends Controller
                 true
             );
 
-            return ResponseHelper::jsonResponse(true, 'Success to get all users', $users, 200);
-
+            return ResponseHelper::jsonResponse(true, 'Success to get all users', UserResource::collection($users), 200);
         } catch(\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
@@ -60,9 +60,18 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserStoreRequest $request)
     {
-        //
+        $request = $request->validated();
+
+        try {
+            $user = $this->userRepository->create($request);
+
+            return ResponseHelper::jsonResponse(true, 'User berhasil ditambahkan', new UserResource($user), 201);
+        } catch (\Exception $e){
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
+
     }
 
     /**
@@ -70,22 +79,56 @@ class UserController extends Controller
      */
     public function show(string $id)
     {
-        //
+        try{
+            $user = $this->userRepository->getById($id);
+
+            if (!$user){
+                return ResponseHelper::jsonResponse(false, 'User tidak ditemukan', null, 404);
+            }
+
+            return ResponseHelper::jsonResponse(true, 'Detail User berhasil diambil', new UserResource($user), 200);
+         } catch (\Exception $e){
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UserUpdateRequest $request, string $id)
     {
-        //
+        $request = $request->validated();
+
+         try{
+            $user = $this->userRepository->getById($id);
+
+            if (!$user){
+                return ResponseHelper::jsonResponse(false, 'User tidak ditemukan', null, 404);
+            }
+
+            $user = $this->userRepository->update($id, $request);
+
+            return ResponseHelper::jsonResponse(true, 'Detail User berhasil diupdate', new UserResource($user), 200);
+         } catch (\Exception $e){
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
-        //
+           try{
+            $user = $this->userRepository->getById($id);
+
+            if (!$user){
+                return ResponseHelper::jsonResponse(false, 'User tidak ditemukan', null, 404);
+            }
+
+            $user = $this->userRepository->delete($id);
+
+            return ResponseHelper::jsonResponse(true, 'Data User berhasil dihapus', new UserResource($user), 200);
+         } catch (\Exception $e){
+            return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
+        }
     }
 }
+

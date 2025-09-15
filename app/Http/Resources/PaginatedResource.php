@@ -3,10 +3,15 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Http\Resources\Json\PaginatedResourceResponse;
 
 class PaginatedResource extends JsonResource
 {
+      /**
+     * Create a new resource instance.
+     *
+     * @param  mixed  $resource
+     * @return void
+     */
 
     public function __construct($resource, public $resourceClass = null)
     {
@@ -18,19 +23,25 @@ class PaginatedResource extends JsonResource
         return $this->resourceClass::collection($resource);
     }
 
+      /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array|\Illuminate\Contracts\Support\Arrayable|\JsonSerializable
+     */
+
     public function toArray($request)
     {
         return [
-            'data' => $this->collect($this->resource),
+            'data' => $this->collect($this->item()),
             'meta' => [
-                'current_page' => $this->resource->currentPage(),
-                'path' => $this->resource->path(),
-                'total' => $this->resource->total(),
-                'per_page' => $this->resource->perPage(),
-                'last_page' => $this->resource->lastPage(),
-                'from' => $this->resource->firstItem(),
-                'to' => $this->resource->lastItem(),
-
+                'current_page' => $this->currentPage(),
+                'from' => $this->firstItem(),
+                'last_page' => $this->lastPage(),
+                'path' => $this->path(),
+                'per_page' => $this->perPage(),
+                'to' => $this->lastItem(),
+                'total' => $this->total(),
             ]
         ];
     }

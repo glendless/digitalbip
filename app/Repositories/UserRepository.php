@@ -3,6 +3,8 @@
 
 use App\Interfaces\UserRepositoryInterface;
 use App\Models\User;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
     class UserRepository implements UserRepositoryInterface
     {
@@ -43,4 +45,82 @@ use App\Models\User;
 
         return $query->paginate($rowPerPage);
       }
+
+      public function getById(string $id)
+      {
+        $query = User::where('id', $id);
+
+        return $query->first();
+      }
+
+      /**
+       * Create a new user instance.
+       *
+       * @param array $data
+       * @return \App\Models\User
+       * @throws \Exception
+       */
+      public function create(array $data)
+      {
+        DB::beginTransaction();
+
+        try{
+            $user = new User;
+            $user->name = $data['name'];
+            $user->email = $data['email'];
+            $user->password = bcrypt($data['password']);
+
+            $user->save();
+
+            DB::commit();
+
+            return $user;
+        } catch(\Exception $e){
+            DB::rollBack();
+
+            throw new Exception($e->getMessage());
+        }
+      }
+
+      public function update(string $id, array $data)
+      {
+          DB::beginTransaction();
+
+        try{
+            $user = User::find($id);
+            $user->name = $data['name'];
+
+            if (isset($data['password'])) {
+                $user->password = bcrypt($data['password']);
+            }
+
+            $user->save();
+
+            DB::commit();
+
+            return $user;
+        } catch(\Exception $e){
+            DB::rollBack();
+
+            throw new Exception($e->getMessage());
+      }
     }
+
+    public function delete(string $id)
+    {
+        DB::beginTransaction();
+
+        try{
+            $user = User::find($id);
+            $user->delete();
+
+            DB::commit();
+
+            return $user;
+        } catch(\Exception $e){
+            DB::rollBack();
+
+            throw new Exception($e->getMessage());
+        }
+    }
+}
