@@ -3,12 +3,13 @@
 namespace App\Models;
 
 use App\Traits\UUID;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HeadOfFamily extends Model
 {
-    use SoftDeletes, UUID;
+    use HasFactory, SoftDeletes, UUID;
 
     protected $fillable = [
         'user_id',
@@ -20,6 +21,15 @@ class HeadOfFamily extends Model
         'gender',
         'marital_status',
     ];
+
+    public function scopeSearch($query, $search)
+    {
+        return $query->whereHas('user', function($query) use ($search) {
+          $query->where('name', 'like', '%' . $search . '%')
+          ->orWhere('email', 'like', '%' . $search . '%');
+        })->orWhere('phone_number', 'like', '%' . $search . '%')
+            ->orWhere('identity_number', 'like', '%' . $search . '%');
+    }
 
     public function user()
     {

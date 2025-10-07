@@ -19,9 +19,9 @@ return new class extends Migration
 
             $table->string('profile_picture');
 
-            $table->integer('identity_number');
+            $table->bigInteger('identity_number');
             $table->date('date_of_birth');
-            $table->integer('phone_number');
+            $table->string('phone_number');
             $table->string('occupation');
 
             $table->enum('gender', ['male', 'female']);

@@ -50,7 +50,7 @@ class UserController extends Controller
                 $request['row_per_page']
             );
 
-            return ResponseHelper::jsonResponse(true, 'Success to get all users', PaginatedResource::make($users, UserResource::class) , 200);
+            return ResponseHelper::jsonResponse(true, 'Data User berhasil diambil', PaginatedResource::make($users, UserResource::class), 200);
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }
