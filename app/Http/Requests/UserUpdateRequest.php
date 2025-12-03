@@ -23,13 +23,4 @@ class UserUpdateRequest extends FormRequest
         ];
     }
 
-    public function messages()
-    {
-        return [
-            'required' => ':attribute wajib diisi',
-            'string' => ':attribute harus berupa string',
-            'max' => ':attribute maksimal :max karakter',
-            'min' => ':attribute minimal :min karakter',
-        ];
-    }
 }

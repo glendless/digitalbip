@@ -4,21 +4,25 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class HeadOfFamilyStoreRequest extends FormRequest
+class HeadOfFamilyUpdateRequest extends FormRequest
 {
+    /**
+     * Determine if the user is authorized to make this request.
+     */
 
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
-    public function rules(): array
+   public function rules(): array
     {
+
          return [
             'name' => 'required|string',
-            'email' => 'required|string|email|unique:users',
-            'password' => 'required|string|min:8',
-            'profile_picture' => 'required|image|mimes:png,jpg,jpeg|max:2048',
+            'email' => 'nullable|string|email|unique:users',
+            'password' => 'nullable|string|min:8',
+            'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'identity_number' => 'required|integer',
             'gender' => 'required|string|in:male,female',
             'date_of_birth' => 'required|date',
@@ -42,5 +46,4 @@ class HeadOfFamilyStoreRequest extends FormRequest
             'marital_status' => 'Status Perkawinan',
         ];
     }
-
 }

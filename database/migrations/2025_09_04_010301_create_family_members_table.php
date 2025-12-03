@@ -27,7 +27,7 @@ return new class extends Migration
             $table->string('occupation');
             $table->enum('gender', ['male', 'female']);
             $table->enum('marital_status', ['single', 'married']);
-            $table->enum('relationship', ['wife', 'child', 'husband']);
+            $table->enum('relation', ['wife', 'child', 'husband']);
 
             $table->softDeletes();
             $table->timestamps();
