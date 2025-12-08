@@ -15,9 +15,9 @@ class FamilyMemberResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'head_of_family' => new HeadOfFamilyResource($this->headOfFamily),
-            'user' => new UserResource($this->user),
+             'id' => $this->id,
+            'head_of_family' => new HeadOfFamilyResource($this->whenLoaded('headOfFamily')),
+            'user' => new UserResource($this->whenLoaded('user')),
             'profile_picture' => $this->profile_picture,
             'identity_number' => $this->identity_number,
             'gender' => $this->gender,

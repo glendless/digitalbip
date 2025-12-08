@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('family_members', function (Blueprint $table) {
+            // TODO implements softdeletes
             $table->uuid('id')->primary();
 
             $table->uuid('head_of_family_id');
@@ -21,11 +22,11 @@ return new class extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('profile_picture');
-            $table->integer('identity_number');
+            $table->bigInteger('identity_number');
+            $table->enum('gender', ['male', 'female']);
             $table->date('date_of_birth');
             $table->string('phone_number');
             $table->string('occupation');
-            $table->enum('gender', ['male', 'female']);
             $table->enum('marital_status', ['single', 'married']);
             $table->enum('relation', ['wife', 'child', 'husband']);
 

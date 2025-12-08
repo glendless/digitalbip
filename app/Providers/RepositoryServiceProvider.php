@@ -2,8 +2,10 @@
 
 namespace App\Providers;
 
+use App\Interfaces\FamilyMemberRepositoryInterface as InterfacesFamilyMemberRepositoryInterface;
 use App\Interfaces\HeadOfFamilyRepositoryInterface;
 use App\Interfaces\UserRepositoryInterface;
+use App\Repositories\FamilyMemberRepository as RepositoriesFamilyMemberRepository;
 // use App\Models\HeadOfFamily;
 use App\Repositories\HeadOfFamilyRepository;
 use App\Repositories\UserRepository;
@@ -21,7 +23,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(UserRepositoryInterface::class, UserRepository::class);
         $this->app->bind(HeadOfFamilyRepositoryInterface::class,
         HeadOfFamilyRepository::class);
-        $this->app->bind(FamilyMemberRepositoryInterface::class, FamilyMemberRepository::class);
+        $this->app->bind(InterfacesFamilyMemberRepositoryInterface::class, RepositoriesFamilyMemberRepository::class);
     }
 
     /**

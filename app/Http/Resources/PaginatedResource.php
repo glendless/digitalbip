@@ -33,7 +33,8 @@ class PaginatedResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'data' => $this->collect($this->item()),
+            // TODO
+            'data' => $this->collect($this->items()),
             'meta' => [
                 'current_page' => $this->currentPage(),
                 'from' => $this->firstItem(),

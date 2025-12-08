@@ -17,14 +17,14 @@ class FamilyMemberFactory extends Factory
     public function definition(): array
     {
         return [
-              'profile_picture' => $this->faker->imageUrl(),
-            'identity_number' => $this->faker->unique()->numberBetween(100, 9999),
+            'profile_picture' => $this->faker->imageUrl(),
+            'identity_number' => $this->faker->unique()->numberBetween(100000000, 999999999),
             'gender' => $this->faker->randomElement(['male', 'female']),
             'date_of_birth' => $this->faker->dateTimeBetween('-60 years', 'now'),
             'phone_number' => $this->faker->unique()->phoneNumber(),
             'occupation' => $this->faker->jobTitle(),
             'marital_status' => $this->faker->randomElement(['single', 'married']),
-            'relation'=> $this->faker->randomElement(['wife', 'child', 'husband']),
+            'relation' => $this->faker->randomElement(['wife', 'child', 'husband']),
         ];
     }
 }

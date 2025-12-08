@@ -2,10 +2,15 @@
 
 namespace App\Models;
 
+use App\Traits\UUID;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class FamilyMember extends Model
 {
+
+     use SoftDeletes, UUID;
+
       protected $fillable = [
         'head_of_family_id',
         'user_id',

@@ -2,10 +2,10 @@
 
 namespace App\Http\Requests;
 
-use App\Models\HeadOfFamily;
+use App\Models\FamilyMember;
 use Illuminate\Foundation\Http\FormRequest;
 
-class HeadOfFamilyUpdateRequest extends FormRequest
+class FamilyMemberUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +21,7 @@ class HeadOfFamilyUpdateRequest extends FormRequest
 
          return [
             'name' => 'required|string',
-            'email' => 'nullable|string|email|unique:users,email' . HeadOfFamily::find($this->route('head_of_family'))->user_id,
+            'email' => 'nullable|string|email|unique:users, email' . FamilyMember::find($this->route('family_member'))->user_id,
             'password' => 'nullable|string|min:8',
             'profile_picture' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'identity_number' => 'required|integer',
@@ -30,6 +30,7 @@ class HeadOfFamilyUpdateRequest extends FormRequest
             'phone_number' => 'required|string',
             'occupation' => 'required|string',
             'marital_status' => 'required|string|in:single,married',
+            'relation' => 'required|string|in:child, wife, husband',
         ];
     }
 
@@ -45,6 +46,7 @@ class HeadOfFamilyUpdateRequest extends FormRequest
             'phone_number' => 'Nomor Telepon',
             'occupation' => 'Pekerjaan',
             'marital_status' => 'Status Perkawinan',
+            'relation' => 'Hubungan',
         ];
     }
 }
