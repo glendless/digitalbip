@@ -29,6 +29,6 @@ class SocialAssistance extends Model
 
     public function socialAssistanceRecipients()
     {
-        return $this->hasMany(SocialAssitanceRecipient::class);
+        return $this->hasMany(SocialAssistanceRecipient::class);
     }
 }

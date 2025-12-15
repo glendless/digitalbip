@@ -43,7 +43,7 @@ class HeadOfFamily extends Model
 
     public function socialAssistanceRecipients()
     {
-        return $this->hasMany(SocialAssitanceRecipient::class);
+        return $this->hasMany(SocialAssistanceRecipient::class);
     }
 
     public function eventParticipants()

@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('social_assitance_recipients', function (Blueprint $table) {
+        Schema::create('social_assistance_recipients', function (Blueprint $table) {
             $table->uuid('id')->primary();
 
             $table->uuid('social_assistance_id');
@@ -24,7 +24,7 @@ return new class extends Migration
             $table->longText('reason');
             $table->enum('bank', ['bri', 'bni', 'bca', 'mandiri']);
             $table->integer('account_number');
-            $table->string('proof');
+            $table->string('proof')->nullable();
             $table->enum('status', ['pending', 'approved', 'rejected'])->default('pending');
 
             $table->softDeletes();
@@ -37,6 +37,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('social_assitance_recipients');
+        Schema::dropIfExists('social_assistance_recipients');
     }
 };
