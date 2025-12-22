@@ -48,6 +48,7 @@ class HeadOfFamilyController extends Controller
             );
 
             return ResponseHelper::jsonResponse(true, 'Data Kepala Keluarga Berhasil Diambil', PaginatedResource::make($headOfFamily, HeadOfFamilyResource::class), 200);
+
         } catch(\Exception $e) {
             return ResponseHelper::jsonResponse(false, 'Data Kepala Keluarga Gagal Diambil', null, 500);
         }

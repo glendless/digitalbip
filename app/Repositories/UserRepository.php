@@ -33,7 +33,7 @@ use Illuminate\Support\Facades\DB;
             return $query;
         }
 
-         public function getAllPaginated(
+    public function getAllPaginated(
         ?string $search,
         ?int $rowPerPage
     ) {

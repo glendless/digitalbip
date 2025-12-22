@@ -51,6 +51,7 @@ class UserController extends Controller
             );
 
             return ResponseHelper::jsonResponse(true, 'Data User Berhasil Diambil', PaginatedResource::make($users, UserResource::class), 200);
+
         } catch(\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
         }

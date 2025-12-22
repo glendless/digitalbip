@@ -44,13 +44,12 @@ class SocialAssistanceController extends Controller
         ]);
 
         try {
-
             $socialAssistances = $this->socialAssistanceRepository->getAllPaginated(
                 $request['search'] ?? null,
                 $request['row_per_page']
             );
 
-             return ResponseHelper::jsonResponse(true, 'Dana Bantuan Sosial Berhasil Diambil', PaginatedResource::make($socialAssistances, SocialAssistanceResource::class), 200);
+            return ResponseHelper::jsonResponse(true, 'Dana Bantuan Sosial Berhasil Diambil', PaginatedResource::make($socialAssistances, SocialAssistanceResource::class), 200);
 
         } catch (\Exception $e) {
             return ResponseHelper::jsonResponse(false, $e->getMessage(), null, 500);
