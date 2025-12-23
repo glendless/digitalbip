@@ -24,7 +24,7 @@ class EventRepository implements EventRepositoryInterface
         $query->orderBy('created_at', 'desc');
 
         if($limit) {
-            $query->takes($limit);
+            $query->take($limit);
         }
 
         if($execute) {

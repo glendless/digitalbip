@@ -1,8 +1,6 @@
 <?php
 
 namespace Database\Seeders;
-
-use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,7 +15,8 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             HeadOfFamilySeeder::class,
             SocialAssistanceSeeder::class,
-            EventSeeder::class
+            EventSeeder::class,
+            EventParticipantSeeder::class
         ]);
     }
 }
