@@ -6,6 +6,7 @@ use App\Http\Controllers\EventController;
 use App\Http\Controllers\EventParticipantController;
 use App\Http\Controllers\FamilyMemberController;
 use App\Http\Controllers\HeadOfFamilyController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialAssistanceController;
 use App\Http\Controllers\SocialAssistanceRecipientController;
 use App\Http\Controllers\UserController;
@@ -38,3 +39,8 @@ use Illuminate\Support\Facades\Route;
 
     Route::apiResource('development-applicant', DevelopmentApplicantController::class);
     Route::get('development-applicant/all/paginated', [DevelopmentApplicantController::class, 'getAllPaginated']);
+
+    Route::get('profile', [ProfileController::class, 'index']);
+    Route::post('profile', [ProfileController::class, 'store']);
+    Route::put('profile', [ProfileController::class, 'update']);
+

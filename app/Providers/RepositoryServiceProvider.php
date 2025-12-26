@@ -12,6 +12,7 @@ use App\Interfaces\EventRepositoryInterface;
 use App\Interfaces\EventParticipantRepositoryInterface;
 use App\Interfaces\DevelopmentRepositoryInterface;
 use App\Repositories\DevelopmentApplicantRepository;
+use App\Interfaces\ProfileRepositoryInterface;
 use App\Repositories\UserRepository;
 use App\Repositories\HeadOfFamilyRepository;
 use App\Repositories\FamilyMemberRepository;
@@ -20,6 +21,7 @@ use App\Repositories\SocialAssistanceRepository;
 use App\Repositories\EventRepository;
 use App\Repositories\EventParticipantRepository;
 use App\Repositories\DevelopmentRepository;
+use App\Repositories\ProfileRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryServiceProvider extends ServiceProvider
@@ -39,6 +41,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(EventParticipantRepositoryInterface::class, EventParticipantRepository::class);
         $this->app->bind(DevelopmentRepositoryInterface::class, DevelopmentRepository::class);
         $this->app->bind(DevelopmentApplicantRepositoryInterface::class, DevelopmentApplicantRepository::class);
+        $this->app->bind(ProfileRepositoryInterface::class, ProfileRepository::class);
     }
 
     /**

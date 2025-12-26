@@ -16,8 +16,13 @@ class Profile extends Model
         'about',
         'headman',
         'people',
-        'agriculture_area',
+        'agricultural_area',
         'total_area'
+    ];
+
+    protected $casts = [
+        'agricultural_area' => 'decimal:2',
+        'total_area' => 'decimal:2',
     ];
 
     public function profileImages()
