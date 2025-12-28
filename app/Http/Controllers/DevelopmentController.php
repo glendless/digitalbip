@@ -7,17 +7,29 @@ use App\Http\Requests\DevelopmentStoreRequest;
 use App\Http\Requests\DevelopmentUpdateRequest;
 use App\Http\Resources\DevelopmentResource;
 use App\Http\Resources\PaginatedResource;
-use App\Models\Development;
 use App\Repositories\DevelopmentRepository;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
 
-class DevelopmentController extends Controller
+class DevelopmentController extends Controller implements HasMiddleware
 {
     private DevelopmentRepository $developmentRepository;
 
     public function __construct(DevelopmentRepository $developmentRepository)
     {
         $this->developmentRepository = $developmentRepository;
+    }
+
+     public static function middleware()
+    {
+        return [
+            new Middleware(PermissionMiddleware::using(['development-list|development-create|development-edit|development-delete']), only: ['index', 'getAllPaginated', 'show']),
+            new middleware(PermissionMiddleware::using(['development-create']), only: ['store']),
+            new middleware(PermissionMiddleware::using(['development-edit']), only: ['update']),
+            new middleware(PermissionMiddleware::using(['development-delete']), only: ['destroy']),
+        ];
     }
 
      public function index(Request $request)

@@ -8,15 +8,26 @@ use App\Http\Requests\HeadOfFamilyUpdateRequest;
 use App\Http\Resources\HeadOfFamilyResource;
 use App\Http\Resources\PaginatedResource;
 use App\Interfaces\HeadOfFamilyRepositoryInterface;
+use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Spatie\Permission\Middleware\PermissionMiddleware;
 
-
-class HeadOfFamilyController extends Controller
+class HeadOfFamilyController extends Controller implements HasMiddleware
 {
     private HeadOfFamilyRepositoryInterface $headOfFamilyRepository;
 
     public function __construct(HeadOfFamilyRepositoryInterface $headOfFamilyRepository) {
         $this->headOfFamilyRepository = $headOfFamilyRepository;
+    }
+
+    public static function middleware() {
+        return [
+            new Middleware(PermissionMiddleware::using(['head-of-family-list|head-of-family-create|head-of-family-edit|head-of-family-delete']), only: ['index', 'getAllPaginated', 'show']),
+            new middleware(PermissionMiddleware::using(['head-of-family-create']), only: ['store']),
+            new middleware(PermissionMiddleware::using(['head-of-family-edit']), only: ['update']),
+            new middleware(PermissionMiddleware::using(['head-of-family-delete']), only: ['destroy']),
+        ];
     }
 
     public function index(Request $request)

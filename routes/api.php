@@ -10,8 +10,9 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SocialAssistanceController;
 use App\Http\Controllers\SocialAssistanceRecipientController;
 use App\Http\Controllers\UserController;
-use App\Models\DevelopmentApplicant;
 use Illuminate\Support\Facades\Route;
+
+    Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('user', UserController::class);
     Route::get('user/all/paginated', [UserController::class, 'getAllPaginated']);
@@ -44,3 +45,4 @@ use Illuminate\Support\Facades\Route;
     Route::post('profile', [ProfileController::class, 'store']);
     Route::put('profile', [ProfileController::class, 'update']);
 
+    });

@@ -1,7 +1,10 @@
 <?php
 
 namespace Database\Seeders;
+
+use App\Models\User;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,8 +21,9 @@ class DatabaseSeeder extends Seeder
             EventSeeder::class,
             EventParticipantSeeder::class,
             DevelopmentSeeder::class,
-            DevelopmentApplicantSeeder::class
-
+            DevelopmentApplicantSeeder::class,
+            PermissionSeeder::class,
+            RoleSeeder::class,
         ]);
     }
 }
