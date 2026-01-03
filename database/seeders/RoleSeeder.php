@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
@@ -15,12 +16,12 @@ class RoleSeeder extends Seeder
     {
         Role::firstOrCreate([
             'name' => 'admin',
-            'guard_name' => 'sanctum'
+            'guard_name' => 'sanctum',
         ])->givePermissionTo(Permission::all());
 
         Role::firstOrCreate([
             'name' => 'head-of-family',
-            'guard_name' => 'sanctum'
+            'guard_name' => 'sanctum',
         ])->givePermissionTo([
             'dashboard-menu',
 
@@ -57,9 +58,7 @@ class RoleSeeder extends Seeder
             'development-applicant-edit',
             'development-applicant-delete',
 
-            'profile-menu',
-
+            'profile-menu'
         ]);
-
     }
 }
